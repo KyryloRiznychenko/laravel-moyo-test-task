@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Products\IndexResource;
 use App\Http\Resources\Api\Products\ShowResource;
 use App\Models\Product;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductController extends Controller
 {
@@ -25,9 +27,16 @@ class ProductController extends Controller
         return new IndexResource(Product::all());
     }
 
-    public function show(Product $product): ShowResource
+    // we can use soft binding instead of manual getting for a model entity.
+    public function show(int $id): ShowResource
     {
-        $product->load([
+        try {
+            $product = Product::query()->findOrFail($id);
+        } catch (Exception $e) {
+            throw new ModelNotFoundException();
+        }
+
+        $product->with([
             'category' => fn($q) => $q->with('parentCategory:id,title'),
             'images' => fn($q) => $q
                 ->orderBy('position')
