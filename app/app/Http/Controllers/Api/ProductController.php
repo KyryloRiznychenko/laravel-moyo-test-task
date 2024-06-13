@@ -39,7 +39,7 @@ class ProductController extends Controller
             throw new ModelNotFoundException();
         }
 
-        $product->with([
+        $product->load([
             'category' => fn($q) => $q->with('parentCategory:id,title'),
             'images' => fn($q) => $q
                 ->orderBy('position')
