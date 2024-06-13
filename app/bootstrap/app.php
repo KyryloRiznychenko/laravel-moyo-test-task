@@ -19,7 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (Exception $e) {
             if ($e->getPrevious() instanceof ModelNotFoundException) {
 
-                return response()->json(['message' => 'The required entity was not found!'], Response::HTTP_NOT_FOUND);
+                return response()->json(['message' => 'The request entity was not found!'], Response::HTTP_NOT_FOUND);
             }
         });
     })->create();
