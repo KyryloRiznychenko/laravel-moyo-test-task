@@ -18,7 +18,8 @@ else
     fi
 
     cp .env.example.local .env
-    php artisan migrate
+    php artisan migrate:fresh --seed
+    php artisan storage:link
 fi
 
 php artisan key:generate

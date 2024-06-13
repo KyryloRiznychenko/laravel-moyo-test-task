@@ -20,7 +20,9 @@ class CategorySeeder extends Seeder
             if (Category::query()->whereTitle($categoryTitle)->doesntExist()) {
                 Category::factory()->create([
                     'title' => $categoryTitle,
-                    'parent_id' => !$isMainCategory ? Category::query()->inRandomOrder()->first()->id : null,
+                    'parent_id' => !$isMainCategory ? Category::query()
+                        ->whereIn('id', range(1, 3))
+                        ->inRandomOrder()->first()->id : null,
                 ]);
             }
         }
