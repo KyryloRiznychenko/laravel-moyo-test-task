@@ -13,7 +13,10 @@ class ProductController extends Controller
 {
     // Usually I keep all logic into services & repositories and trigger them from controllers,
     // but due to small size of the task I think it's unnecessary.
-    public function index()
+    //
+    // I could also use the Request class for pagination functional,
+    // but the pagination wasn't described in the task's goals.
+    public function index(): IndexResource
     {
         $products = Product::all();
         $products->load([
