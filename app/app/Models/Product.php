@@ -14,14 +14,9 @@ class Product extends Model
     protected $fillable = [
         'title',
         'description',
-        'is_published',
         'price',
         'price_discount',
         'quantity'
-    ];
-
-    protected $casts = [
-        'is_published' => 'boolean',
     ];
 
     public function category(): BelongsTo
