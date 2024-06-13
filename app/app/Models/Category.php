@@ -16,6 +16,8 @@ class Category extends Model
         'parent_id',
     ];
 
+    public $timestamps = false;
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
