@@ -15,16 +15,13 @@ class IndexResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return $this->resource->map(function (Product $product) {
-            return [
-                'id' => $product->id,
-                'categoryName' => $product->category->title,
-                'name' => $product->title,
-                'price' => $product->price_discount < $product->price ? $product->price_discount : $product->price,
-                'inStock' => $product->quantity > 0 && ($product->price || $product->price_discount),
-                'src' => $product->images->first()->src,
-            ];
-
-        })->toArray();
+        return [
+            'id' => $product->id,
+            'categoryName' => $product->category->title,
+            'name' => $product->title,
+            'price' => $product->price_discount < $product->price ? $product->price_discount : $product->price,
+            'inStock' => $product->quantity > 0 && ($product->price || $product->price_discount),
+            'src' => $product->images->first()->src,
+        ];
     }
 }
