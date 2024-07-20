@@ -27,7 +27,7 @@ class ProductController extends Controller
                 ->first(),
         ]);
 
-        return new IndexResource(Product::all());
+        return IndexResource::collection($products);
     }
 
     // we can use soft binding instead of manual getting for a model entity.
