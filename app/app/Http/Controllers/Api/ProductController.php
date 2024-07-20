@@ -8,6 +8,7 @@ use App\Http\Resources\Api\Products\ShowResource;
 use App\Models\Product;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductController extends Controller
 {
@@ -16,7 +17,7 @@ class ProductController extends Controller
     //
     // I could also use the Request class for pagination functional,
     // but the pagination wasn't described in the task's goals.
-    public function index(): IndexResource
+    public function index(): AnonymousResourceCollection
     {
         $products = Product::all();
         $products->load([
